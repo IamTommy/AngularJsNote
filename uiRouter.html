@@ -5,38 +5,17 @@
     <title></title>
 </head>
 <body>
-    <div ng-app="myApp">
-        <a ui-sref="home">home</a>
-        <a ui-sref="content">content</a>
-        <div ui-view=""></div>
-    </div>
-    <script type="application/javascript" src="Js/angular/angular.js"></script>
-    <script type="application/javascript" src="Js/angular/angular-ui-router.js"></script>
-    <script type="application/javascript">
-        var myApp = angular.module('myApp', ['ui.router']).config(function($stateProvider,
-                                                                           $urlRouterProvider){
-
-
-            $urlRouterProvider
-                    .when('/c?id', '/contacts/:id')
-                    .when('/user/:id', '/contacts/:id')
-                    .otherwise('/');
-
-            $stateProvider .state("home", {
-                url: "/",
-                template: '<p class="lead">Welcome to the UI-Router Demo</p>' +
-                '<p>Use the menu above to navigate. ' +
-                'Pay attention to the <code>$state</code> and <code>$stateParams</code> values below.</p>' +
-                '<p>Click these links—<a href="#/c?id=1">Alice</a> or ' +
-                '<a href="#/user/42">Bob</a>—to see a url redirect in action.</p>'
-            }).state("content",{
-                url: "/content",
-                templateUrl:'tpl/uiRouter/page1.html'
-            }).state("content.list1",{
-                url: "/list1",
-                templateUrl:'tpl/uiRouter/page2.html'
-            });
-        });
-    </script>
+<div ng-app="myApp">
+    <a ui-sref="home">home</a>
+    <a ui-sref="content">content</a>
+    <div ui-view></div>
+</div>
+<script type="application/javascript" src="Js/angular/angular.js"></script>
+<script type="application/javascript" src="Js/angular/angular-ui-router.js"></script>
+<script type="application/javascript" src="Js/Controller/controllerUiRouter.js"></script>
+<script type="application/javascript" src="Js/Router/uiRouter_Router.js"></script>
+<script type="application/javascript">
+    var myApp = angular.module('myApp', ['uiRouter_Router','uiRouterCtrl']);
+</script>
 </body>
 </html>

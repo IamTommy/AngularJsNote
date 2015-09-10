@@ -1,6 +1,12 @@
 <div>
     <div>
-        <h1>Page 1 content goes here... <a ui-sref="content.list1">page2</a></h1>
+        <h1>
+            welcome to content page. {{title}}
+        </h1>
+        <a ui-sref="content.list1({contactId:1})">list1</a>
+        <a ui-sref="content.list2({contactId:2})">list2</a>
+        <a ui-sref="content.list3">list3</a>
+        <a ui-sref="content.list4">list4</a>
         <div ui-view>
 
         </div>
