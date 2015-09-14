@@ -3,6 +3,29 @@
  */
 
 /// <reference path="../angular/angular.js" />
+var jsonTemplate = {
+    name: "content.list5",
+    template: "<h1>welcome to list5,this si jsonTemplate</h1> <a ui-sref='content.list5.detail'>detail</a> <div ui-view></div>",
+    url: "/list5",
+    resolve: {
+        caoa: function () {
+            return {name: "tommy", key: "haha"};
+        }
+
+    },
+    controller: function ($scope, myBookService) {
+        $scope.littleData = ["a", "b", "c", "d"];
+    },
+    onEnter: function () {
+    },
+    onExit: function () {
+    }
+};
+
+var jsonTemplate1 = {
+    name: "content.list5.detail",
+    template: "<h1>woqu</h1><ul><li ng-repeat='data in littleData'>{{data}}</li></ul>",
+};
 
 var uiRouter_Router = angular.module("uiRouter_Router", ['ui.router']);
 uiRouter_Router.config(function ($stateProvider,
@@ -20,6 +43,10 @@ uiRouter_Router.config(function ($stateProvider,
             controller: function ($scope) {
                 $scope.title = "heheheh";
             }
+        }).state("url", {
+            url:"/url",
+            template:"<h1>Url Test</h1><ul><li ng-repeat='url in urls'><a ui-sref='{{url.sref}}'>{{url.name}}</a></li></ul>",
+            controller:urlCtrl1
         }).state("content.list1", {
             url: "/list1/{contactId:[0-9]{1,4}}",
             templateProvider: function ($timeout, $stateParams) {
@@ -45,20 +72,8 @@ uiRouter_Router.config(function ($stateProvider,
                 //暂时还不知道做什么的...
                 //先看完教程...
             }
-        }).state("content.list5", {
-            url:"/list5",
-            resole: {
-                translation: "translation",
-                getData: function () {
-                    return [
-                        {name: "Tommy", age: 27},
-                        {name: "strong", age: 37},
-                        {name: "tim", age: 38},
-                        {name: "jinuobili", age: 39},
-                    ];
-                }
-            },
-            controller:"ageTable"
-        });
+        })
+            .state(jsonTemplate)
+            .state(jsonTemplate1);
     }
 );

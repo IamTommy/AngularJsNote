@@ -5,7 +5,8 @@
 /// <reference path="../angular/angular.js" />
 
 var uiRouterCtrl = angular.module("uiRouterCtrl",[]);
-uiRouterCtrl.controller("firstCtrl",function($scope){
+uiRouterCtrl.controller("firstCtrl",function($scope,myBookService){
+
     $scope.listData = [
         { name : "Tommy",email:"tlstommy@qq.com" },
         { name : "Jacking",email:"jacking@qq.com" },
@@ -13,6 +14,8 @@ uiRouterCtrl.controller("firstCtrl",function($scope){
     ];
 });
 
-uiRouterCtrl.controller("ageTable",function(){
-
+uiRouterCtrl.controller("urlCtrl1",function($scope){
+    $scope.urls = [
+        { name : "id1",serf:"" }
+    ];
 });
