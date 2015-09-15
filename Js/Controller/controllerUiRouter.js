@@ -16,6 +16,6 @@ uiRouterCtrl.controller("firstCtrl",function($scope,myBookService){
 
 uiRouterCtrl.controller("urlCtrl1",function($scope){
     $scope.urls = [
-        { name : "id1",serf:"" }
+        { name : "id1",serf: "" }
     ];
 });
