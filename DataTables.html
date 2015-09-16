@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="showcase">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/jquery.dataTables.css"/>
+    <link rel="stylesheet" href="css/dataTables.bootstrap.min.css"/>
+</head>
+<body>
+<div>
+    <h3>Zero configuration</h3>
+    <p>
+    <table datatable="" class="row-border hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>First name</th>
+            <th>Last name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>Foo</td>
+            <td>Bar</td>
+        </tr>
+        <tr>
+            <td>123</td>
+            <td>Someone</td>
+            <td>Youknow</td>
+        </tr>
+        <tr>
+            <td>987</td>
+            <td>Iamout</td>
+            <td>Ofinspiration</td>
+        </tr>
+        </tbody>
+    </table>
+    </p>
+</div>
+
+<script src="Js/Jquery/jquery.min.js"></script>
+<script src="Js/Jquery/jquery.dataTables.js"></script>
+<script src="Js/angular/angular.min.js"></script>
+<script src="Js/angular/angular-datatables.min.js"></script>
+<script type="text/javascript">
+    angular.module('showcase', ['datatables']);
+
+</script>
+</body>
+</html>
