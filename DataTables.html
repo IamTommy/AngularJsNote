@@ -38,6 +38,36 @@
         </tbody>
     </table>
     </p>
+
+    <h3>属性</h3>
+    <p  ng-controller="ctrl1">
+    <table datatable="" dt-options="ctrl1.dtOptions" dt-column-defs="ctrl1.dtColumnDefs" class="row-border hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>First name</th>
+            <th>Last name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>Foo</td>
+            <td>Bar</td>
+        </tr>
+        <tr>
+            <td>123</td>
+            <td>Someone</td>
+            <td>Youknow</td>
+        </tr>
+        <tr>
+            <td>987</td>
+            <td>Iamout</td>
+            <td>Ofinspiration</td>
+        </tr>
+        </tbody>
+    </table>
+    </p>
 </div>
 
 <script src="Js/Jquery/jquery.min.js"></script>
@@ -45,7 +75,20 @@
 <script src="Js/angular/angular.min.js"></script>
 <script src="Js/angular/angular-datatables.min.js"></script>
 <script type="text/javascript">
-    angular.module('showcase', ['datatables']);
+    var app = angular.module('showcase', ['datatables']);
+    app.controller("ctrl1",function(DTOptionsBuilder, DTColumnDefBuilder){
+        var vm = this;
+        vm.dtOptions = DTOptionsBuilder.newOptions()
+                .withPaginationType('full_numbers')
+                .withDisplayLength(2)
+                .withDOM('pitrfl');
+        vm.dtColumnDefs = [
+            DTColumnDefBuilder.newColumnDef(0),
+            DTColumnDefBuilder.newColumnDef(1).notVisible(),
+            DTColumnDefBuilder.newColumnDef(2).notSortable()
+        ];
+    });
+
 
 </script>
 </body>
