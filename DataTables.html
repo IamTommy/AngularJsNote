@@ -6,42 +6,18 @@
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="css/jquery.dataTables.css"/>
     <link rel="stylesheet" href="css/dataTables.bootstrap.min.css"/>
+    <style type="text/css">
+        p {
+            margin-top: 30px;
+        }
+    </style>
 </head>
 <body>
 <div>
-    <h3>Zero configuration</h3>
+    <h3>1.Base</h3>
     <p>
-    <table datatable="" class="row-border hover">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>First name</th>
-            <th>Last name</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>1</td>
-            <td>Foo</td>
-            <td>Bar</td>
-        </tr>
-        <tr>
-            <td>123</td>
-            <td>Someone</td>
-            <td>Youknow</td>
-        </tr>
-        <tr>
-            <td>987</td>
-            <td>Iamout</td>
-            <td>Ofinspiration</td>
-        </tr>
-        </tbody>
-    </table>
-    </p>
-
-    <h3>属性</h3>
-    <p  ng-controller="ctrl1">
-    <table datatable="" dt-options="ctrl1.dtOptions" dt-column-defs="ctrl1.dtColumnDefs" class="row-border hover">
+    <table datatable=""
+           class="row-border hover">
         <thead>
         <tr>
             <th>ID</th>
@@ -69,25 +45,72 @@
     </table>
     </p>
 </div>
+<div ng-controller="testCtrl1 as ctrl">
+    <h3>2.属性</h3>
+    <p>
+        首先就遇到了一个问题. <br/>
+        ng-controller 为什么不as一下就不能正确显示。<br/>
+        或许是我 还不太了解 angularjs 等多熟悉一下再回头想想
+    </p>
+    <table datatable="" dt-options="ctrl.dtOptions" dt-column-defs="ctrl.dtColumnDefs" class="row-border hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>First name</th>
+            <th>Last name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>Foo</td>
+            <td>Bar</td>
+        </tr>
+        <tr>
+            <td>123</td>
+            <td>Someone</td>
+            <td>Youknow</td>
+        </tr>
+        <tr>
+            <td>987</td>
+            <td>Iamout</td>
+            <td>Ofinspiration</td>
+        </tr>
+        </tbody>
+    </table>
 
+    <p>
+        例子中有两个参数. <br/>
+        DTOptionsBuilder, DTColumnDefBuilder <br/>
+    </p>
+    <h4>2.1 DTOptionsBuilder</h4>
+    <h5>2.1.1 withOption</h5>
+    <p>
+        This API is used to add additional option to the DataTables options. <br/>
+
+        Add an option to the wrapped datatables options. For example, the following code add the option fnRowCallback:
+    </p>
+    <p>
+
+    </p>
+</div>
 <script src="Js/Jquery/jquery.min.js"></script>
 <script src="Js/Jquery/jquery.dataTables.js"></script>
 <script src="Js/angular/angular.min.js"></script>
 <script src="Js/angular/angular-datatables.min.js"></script>
 <script type="text/javascript">
-    var app = angular.module('showcase', ['datatables']);
-    app.controller("ctrl1",function(DTOptionsBuilder, DTColumnDefBuilder){
-        var vm = this;
-        vm.dtOptions = DTOptionsBuilder.newOptions()
-                .withPaginationType('full_numbers')
-                .withDisplayLength(2)
-                .withDOM('pitrfl');
-        vm.dtColumnDefs = [
-            DTColumnDefBuilder.newColumnDef(0),
-            DTColumnDefBuilder.newColumnDef(1).notVisible(),
-            DTColumnDefBuilder.newColumnDef(2).notSortable()
-        ];
-    });
+   angular.module('showcase', ['datatables']).controller("testCtrl1",function(DTOptionsBuilder, DTColumnDefBuilder){
+       var vm = this;
+       vm.dtOptions = DTOptionsBuilder.newOptions()
+               .withPaginationType('full_numbers')
+               .withDisplayLength(2)
+               .withDOM('pitrfl');
+       vm.dtColumnDefs = [
+           DTColumnDefBuilder.newColumnDef(0),
+           DTColumnDefBuilder.newColumnDef(1).notVisible(),
+           DTColumnDefBuilder.newColumnDef(2).notSortable()
+       ];
+   });
 
 
 </script>
