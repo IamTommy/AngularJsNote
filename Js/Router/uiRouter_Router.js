@@ -46,7 +46,9 @@ uiRouter_Router.config(function ($stateProvider,
         }).state("url", {
             url:"/url",
             template:"<h1>Url Test</h1><ul><li ng-repeat='url in urls'><a ui-sref='{{url.sref}}'>{{url.name}}</a></li></ul>",
-            controller:urlCtrl1
+            controller: function(){
+                //urlCtrl1
+            }
         }).state("content.list1", {
             url: "/list1/{contactId:[0-9]{1,4}}",
             templateProvider: function ($timeout, $stateParams) {
