@@ -2,16 +2,16 @@
  * Created by CallMeTommy on 2015/9/29.
  */
 
-var router = angular.module("router", ['ui.router']);
+var routertest = angular.module("routerBook", ['ui.router']);
 
 
-router.config(function ($stateProvider,
+routertest.config(function ($stateProvider,
                                  $urlRouterProvider)
 {
     $stateProvider.state("home", {
         url: "/",
-        template: '<h1>{{title}}}</h1>',
-        controller:'homePage'
+        templateUrl: 'Tpl/uiRouter/HomePage.html',
+        controller: 'homePage'
     })
 
 

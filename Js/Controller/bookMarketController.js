@@ -2,11 +2,9 @@
  * Created by CallMeTommy on 2015/9/29.
  */
 
-var controllers = angular.module("controllers",[]);
+var bookControllers = angular.module("bookControllers",[]);
 
-controllers.controller("homePage",function($scope)
-{
-    var me = $scope;
-
-    me.title = " Welcome to BookMarket ";
+bookControllers.controller('homePage',function($scope){
+    $scope.title = 'welcome to BookMarket';
 });
+
