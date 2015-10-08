@@ -45,31 +45,145 @@ routertest.config(function ($stateProvider,
 
 
     //Controllers
-    $stateProvider.state("myControllers",{
-        url:'/myControllers',
-        templateUrl:'Tpl/uiRouter/bookControllers.html'
-    }).state("myControllers.typeFunction",{
-        url:"/typeFunction",
-        template:"<h3>{{title}}</h3>",
-        controller:function($scope) {
+    $stateProvider.state("myControllers", {
+        url: '/myControllers',
+        templateUrl: 'Tpl/uiRouter/bookControllers.html'
+    }).state("myControllers.typeFunction", {
+        url: "/typeFunction",
+        template: "<h3>{{title}}</h3>",
+        controller: function ($scope) {
             $scope.title = " Hi this is Controller of function ";
         }
-    }).state('myControllers.stringAs',{
-        url:"/stringAs",
-        template:"<h3>{{title}}<small>{{ctrl.stringAs}}</small></h3>",
-        controller:"stringAsCtrl as ctrl"
-    }).state("myControllers.myProvider",{
-        url:'/myProvider/task/:taskName',
-        template:"<h3>{{title}}</h3>",
-        controllerProvider: function($stateParams) {
+    }).state('myControllers.stringAs', {
+        url: "/stringAs",
+        template: "<h3>{{title}}<small>{{ctrl.stringAs}}</small></h3>",
+        controller: "stringAsCtrl as ctrl"
+    }).state("myControllers.myProvider", {
+        url: '/myProvider/task/:taskName',
+        template: "<h3>{{title}}</h3>",
+        controllerProvider: function ($stateParams) {
             var taskName = $stateParams.taskName;
 
-            if(!taskName)
+            if (!taskName)
                 taskName = "NoTask";
 
             return "controllerProvider" + taskName;
         }
     });
 
+    //Resolves
+    $stateProvider.state("myResolves", {
+        url: '/myResolves',
+        template: '<h3>{{title}}</h3>',
+        resolve: {
+            simpleObj: function () {
+                //console.log('simpleObj');
 
+                return {
+                    value: 'simple!'
+                };
+            },
+            evenTest: function () {
+
+
+            }
+        },
+        controller: function ($scope, simpleObj) {
+            $scope.title = simpleObj.value;
+
+
+             $scope.$on('$viewContentLoading',function(event, viewConfig){
+
+                    console.log('$viewContentLoading');
+             });
+
+             $scope.$on('$viewContentLoaded',function(event, viewConfig){
+                console.log('$viewContentLoading');
+             });
+            //console.log(' pass by ctrl ');
+        },
+        onEnter: function (simpleObj) {
+            //console.log(simpleObj.value);
+            //console.log("onEnter");
+        },
+        onExit: function (simpleObj) {
+            //console.log(simpleObj.value);
+            //console.log("onExit");
+        }
+    });
+
+
+    //parent
+
+    $stateProvider.state("myParent",{
+
+        url : "/myParent",
+        templateUrl:"Tpl/uiRouter/booMyParents.html",
+        controller:function($scope)
+        {
+            $scope.talk = " oh my son ";
+        },
+        resolve:{
+            mytest1 : function(){
+                return "heiheihei";
+            },
+            mytest2 : function(){
+                return "hahaha";
+            }
+        }
+
+    }).state("myParent.child1",{
+        url : "/child1",
+        template:"<h3>this is child string , my parent say ' {{talk}} ' </h3>"
+    }).state("child2",{
+        url : "/child2",
+        template:"<h3>this is child parent , my parent say ' {{talk}} ' </h3>",
+        parent : 'myParent',
+        resolve: {
+            mytest2 : function(){
+                return "testhhaaha";
+            }
+        },
+        controller:function(mytest1,mytest2)
+        {
+            console.log(mytest1);
+            console.log(mytest2);
+        }
+    });
+
+
+    $stateProvider.state("testAbstract",{
+
+        url : "/testAbstract",
+            templateUrl:"Tpl/uiRouter/bookAbstract.html",
+        controller:function($scope)
+        {
+            $scope.talk = " oh my son ";
+        },
+        abstract : true
+
+    }).state("testAbstract.heihei",{
+        templateUrl:"Tpl/uiRouter/bookAbstract1.html"
+    });
+
+    $stateProvider.state("myViews",{
+        url:'/myViews',
+        template:"<h3>myViews</h3><div ui-view='body'></div><div ui-view='footer'></div>",
+        views:{
+            "body":{
+                template : " this is body {{say}} ",
+                controller:function($scope)
+                {
+                    $scope.say  = "call me body"
+                }
+            },
+            "footer":{
+                template : " this is footer {{say}} ",
+                controller:function($scope)
+                {
+                    $scope.say  = "call me footer"
+                }
+            }
+        }
+    });
 });
