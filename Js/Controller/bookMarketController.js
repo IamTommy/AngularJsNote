@@ -1,11 +1,15 @@
 /**
  * Created by CallMeTommy on 2015/9/29.
  */
+    function myTest()
+    {
 
+    }
 var bookControllers = angular.module("bookControllers",[]);
 
 bookControllers.controller('homePage',function($scope){
     $scope.title = 'welcome to BookMarket';
+    $scope.data = {a:1,b:2 };
 });
 
 bookControllers.controller('templateCtrl',function($scope){

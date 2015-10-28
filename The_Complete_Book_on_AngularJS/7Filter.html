@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>filter</title>
+
+    <link rel="stylesheet" href="../css/all.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+</head>
+<body >
+<div class="container" ng-controller="filterCtrl">
+<h1>filter</h1>
+<div class="block">
+<p>
+    <h2>currency</h2>
+
+    {{
+        123.000000 | currency
+    }}
+
+    {{
+        caocaocao | currency
+    }}
+
+</p>
+</div>
+    <div class="block">
+<p>
+    <h2>date</h2>
+    today : {{ today }}
+<table class="table" width="100%">
+    <thead>
+        <th>type</th>
+        <th>result</th>
+    </thead>
+    <tbody>
+    <tr>
+        <td>default</td>
+        <td>{{ today | date }}</td>
+    </tr>
+    <tr>
+        <td>medium</td>
+        <td>{{ today | date : 'medium' }}</td>
+    </tr>
+    <tr>
+        <td>short</td>
+        <td>{{ today | date : 'short' }}</td>
+    </tr>
+    <tr>
+        <td>fullDate</td>
+        <td>{{ today | date:'fullDate' }}</td>
+    </tr>
+    <tr>
+        <td>longDate</td>
+        <td>{{ today | date:'longDate' }}</td>
+    </tr>
+    <tr>
+        <td>mediumDate</td>
+        <td>{{ today | date:'mediumDate' }}</td>
+    </tr>
+    <tr>
+        <td>shortDate</td>
+        <td>{{ today | date:'shortDate' }}</td>
+    </tr>
+    <tr>
+        <td>mediumTime</td>
+        <td>{{ today | date:'mediumTime' }}</td>
+    </tr>
+    <tr>
+        <td>shortTime</td>
+        <td>{{ today | date:'shortTime' }}</td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+</p>
+        <p>
+            还可以使用 yyyy-MM-dd 这种格式来格式化时间
+        </p>
+
+        <table class="table">
+            <thead>
+            <th>type</th>
+            <th>result</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td>yyyy</td>
+                <td>{{ today | date:'yyyy'}}</td>
+            </tr>
+            <tr>
+                <td>EEEE</td>
+                <td>{{ today | date:'EEEE' }}</td>
+            </tr>
+            <tr>
+                <td>yyyy/MM/dd HH:mm:ss</td>
+                <td>{{ today | date:'yyyy/MM/dd HH:mm:ss' }}</td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="block">
+        <h2>filter</h2>
+        <p>
+            <h4>过滤字符串 Source:{{ jsonData }}</h4>
+        <table class="table">
+            <tbody>
+            <tr>
+                <td>a</td>
+                <td>{{ jsonData | filter : 'a'}}</td>
+            </tr>
+            <tr>
+                <td>!a</td>
+                <td>{{ jsonData | filter : '!a'}}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        </p>
+        
+        <p>
+            <h4>也可以是一个function</h4>
+        <table class="table">
+            <tbody>
+            <tr>
+                <td><pre> jsonData | filter : ilikee </pre></td>
+                <td>{{ jsonData | filter : ilikee }}</td>
+            </tr>
+            </tbody>
+        </table>
+        </p>
+
+
+
+
+
+    </div>
+
+    <div>
+        <p>
+        <h2>json</h2>
+        <table class="table">
+            <tbody>
+            <tr>
+                <td>json</td>
+                <td>{{ jsonData |  json}}</td>
+            </tr>
+            </tbody>
+        </table>
+        </p>
+    </div>
+
+    <div>
+        <p>
+        <h2>limitTo 截取</h2>
+        Source : San Francisco is very cloudy
+        <table class="table">
+            <tbody>
+            <tr>
+                <td>limitTo:7</td>
+                <td>{{ 'San Francisco is very cloudy' | limitTo:7 }}</td>
+            </tr>
+            <tr>
+                <td>limitTo:-7</td>
+                <td>{{ 'San Francisco is very cloudy' | limitTo:-7 }}</td>
+            </tr>
+            <tr>
+                <td>Array 也可以 {{jsonData}} </td>
+                <td>{{ jsonData | limitTo: 2 }}</td>
+            </tr>
+            </tbody>
+        </table>
+        </p>
+    </div>
+</div>
+
+
+<script type="application/javascript" src="../Js/angular/angular.js"></script>
+<script type="text/javascript">
+
+    var app = angular.module('myApp',[]);
+    app.controller('filterCtrl',function($scope){
+        $scope.today = new Date();
+        $scope.jsonData = ['a1','a2','b','c','d','e2'];
+        $scope.ilikee = function(str){
+            return str.indexOf('e') > -1;
+        }
+    });
+</script>
+</body>
+</html>

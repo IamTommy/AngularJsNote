@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app="clockApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-controller="timenow">
+ Time : {{clock.now}}
+    <h3 ng-bind="clock.now"></h3>
+</div>
+<script type="application/javascript" src="../Js/angular/angular.js"></script>
+<script type="application/javascript">
+
+    var clockApp = angular.module('clockApp',[]);
+    clockApp.controller('timenow',function($scope) {
+        $scope.clock = {now: new Date()}
+        setInterval(function () {
+            $scope.$apply(function () {
+                        $scope.clock.now = new Date()
+                    }
+            );
+
+        }, 1000);
+    });
+</script>
+</body>
+</html>
