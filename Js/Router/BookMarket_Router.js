@@ -5,6 +5,8 @@
 var routertest = angular.module("routerBook", ['ui.router']);
 
 
+function aaa(){};
+
 routertest.config(function ($stateProvider,
                             $urlRouterProvider) {
     $stateProvider.state("home", {
