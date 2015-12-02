@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>filter</title>
+
+    <link rel="stylesheet" href="../css/all.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+</head>
+<body>
+<sample1></sample1>
+<div sample1=""></div>
+<div class="sample1"></div>
+<sample2></sample2>
+
+
+<script type="application/javascript" src="../Js/angular/angular.js"></script>
+<script type="text/javascript">
+
+    var app = angular.module('myApp',[]);
+
+    //最简单的.
+    app.directive('sample1',function(){
+        return {
+            restrict:"AEMC",
+            template:"<div>hehe</div>",
+            replace:true,
+            priority:11,
+            controller:function(){
+                console.log('pass by sample1  ');
+
+            }
+        };
+    });
+
+    app.directive('sample2',function(){
+        return {
+            restrict:"AEMC",
+            template:"<div>sample2 text</div>",
+            replace:true,
+            priority:12,
+            controller: function(){
+                console.log('pass by sample2');
+            }
+        };
+    });
+
+
+
+</script>
+</body>
+</html>
