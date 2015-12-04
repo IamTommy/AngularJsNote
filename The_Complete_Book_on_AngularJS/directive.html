@@ -6,15 +6,125 @@
 
     <link rel="stylesheet" href="../css/all.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <style type="text/css">
+        table td { width: 33%; }
+
+        .displayliketext {
+         border: 0;
+        }
+    </style>
 </head>
 <body>
-<sample1></sample1>
-<div sample1=""></div>
-<div class="sample1"></div>
-<sample2></sample2>
+<h3>restrict</h3>
+<table class="table">
+    <thead>
+        <th style="width: 20%;">name</th>
+        <th>code</th>
+        <th>result</th>
+    </thead>
+    <tbody>
+    <tr>
+        <td>E (元素)</td>
+        <td>
+            <textarea class="form-control displayliketext">
+                <sample1></sample1>
+            </textarea>
+        </td>
+        <td><sample1></sample1></td>
+    </tr>
+    <tr>
+        <td>C</td>
+        <td>
+            <textarea class="form-control displayliketext">
+                <div class="sample1"></div>
+            </textarea>
+        </td>
+        <td>
+            <div class="sample1"></div>
+        </td>
+    </tr>
+    <tr>
+        <td>A</td>
+        <td>
+            <textarea class="form-control displayliketext">
+                <div sample1></div>
+            </textarea>
+        </td>
+        <td>
+            <div sample1></div>
+        </td>
+    </tr>
+    <tr>
+        <td>M</td>
+        <td>
+            <textarea class="form-control displayliketext">
+                <!-- directive: sample1  -->
+            </textarea>
+        </td>
+        <td>
+            <!-- directive: sample1  -->
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+<br>
+<br>
+
+<h3>priority</h3>
+
+<table class="table">
+    <thead>
+    <th>name</th>
+    <th>code</th>
+    <th>result</th>
+    </thead>
+    <tbody>
+    <tr>
+        <td>priority</td>
+        <td>
+            <textarea class="form-control displayliketext" style="height: 500px;">
+    app.directive('btn', function($timeout) {
+        return {
+            restrict: 'A',
+            priority: 49,
+            link: function(scope, element, attrs) {
+                console.log('btn link')
+                element.addClass('btn');
+            }
+        };
+    });
+
+    app.directive('primary', function($http) {
+        return {
+            restrict: 'A',
+            priority: 50,
+            link: function(scope, element, attrs) {
+                console.log('primary link');
+                if (element.hasClass('btn')) {
+                    element.addClass('btn-primary');
+                }
+            }
+        };
+    });
+            </textarea>
+            </code>
+
+        </td>
+        <td><div primary btn>The Hitchhiker’s Guide to the Directive Demo</div></td>
+    </tr>
+
+    </tbody>
+</table>
+
+<br><br><br>
+<h3>
+    terminal (以下优先级的是否继续执行)
+</h3>
 
 
-<script type="application/javascript" src="../Js/angular/angular.js"></script>
+<script type="application/javascript" src="angular.js"></script>
 <script type="text/javascript">
 
     var app = angular.module('myApp',[]);
@@ -24,29 +134,45 @@
         return {
             restrict:"AEMC",
             template:"<div>hehe</div>",
-            replace:true,
-            priority:11,
+            link: function(scope, element, attrs) {
+
+            },
             controller:function(){
-                console.log('pass by sample1  ');
 
             }
         };
     });
 
-    app.directive('sample2',function(){
+    app.directive('btn', function($timeout) {
         return {
-            restrict:"AEMC",
-            template:"<div>sample2 text</div>",
-            replace:true,
-            priority:12,
-            controller: function(){
-                console.log('pass by sample2');
+            restrict: 'A',
+            priority: 999,
+            terminal: true,
+            link: function(scope, element, attrs) {
+                console.log('btn link')
+                element.addClass('btn');
             }
         };
     });
+
+    app.directive('primary', function($http) {
+        return {
+            restrict: 'A',
+            priority: 49,
+
+            link: function(scope, element, attrs) {
+                console.log('primary link');
+                //if (element.hasClass('btn')) {
+                    element.addClass('btn-primary');
+                //}
+            }
+        };
+    });
+
 
 
 
 </script>
 </body>
 </html>
+

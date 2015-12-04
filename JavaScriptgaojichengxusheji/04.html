@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>04</title>
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+
+
+    var i = 0;
+    var ii = i;
+    ii = 1;
+    console.log(i);
+    console.log(ii);
+
+    var o = { a: 1 };
+    var o1 = o;
+    o1.a = 2;
+    console.log(o.a);
+    console.log(o1.a);
+
+    var o = {
+        a: 'test'
+    }
+
+    function a(obj)
+    {
+        obj.a = 'test1';
+    }
+
+    a(o);
+
+    console.log(o);
+
+    console.log(typeof('sadasd'))
+    console.log(typeof({}))
+    console.log(typeof(function(){}))
+    console.log(typeof([]))
+    console.log(typeof(1));
+    console.log(typeof(NaN));
+    console.log(typeof(Number.MIN_VALUE));
+    console.log(typeof(Infinity));
+    console.log(typeof("123"));
+    console.log(typeof(true));
+    console.log(typeof(window));
+    console.log(typeof(document));
+    console.log(typeof(null));
+    console.log(typeof(eval));
+    console.log(typeof(Date));
+    console.log(typeof(sss));
+    console.log(typeof(undefined));
+
+
+    var a = 1;
+    function funca()
+    {
+        var b = 2;
+
+
+
+        function funcb() {
+            var c = 3;
+        }
+        funcb();
+    }
+    funca();
+
+    function test1()
+    {
+        var qs = "?debug=true"
+
+        with(location)
+        {
+            var url  = href +qs;
+        }
+
+        return url;
+    }
+
+    function test2() {
+        try {
+            var aaa = "aa";
+        } catch (e) {
+
+        }
+
+        return aaa;
+    }
+
+    function test3()
+    {
+        bbb = "bbb";
+    }
+    test3();
+    console.log(test1());
+    console.log(test2());
+    console.log(bbb);
+    console.log(aaa);
+
+
+
+</script>

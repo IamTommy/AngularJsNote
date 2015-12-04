@@ -6,6 +6,11 @@
 
     <link rel="stylesheet" href="../css/all.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <style type="text/css">
+        .ng-invalid {
+            border:1px red solid;
+        }
+    </style>
 </head>
 <body >
 <div class="container" ng-controller="filterCtrl">
@@ -13,6 +18,8 @@
 <div class="block">
 <p>
     <h2>currency</h2>
+
+    <br>
 
     {{
         123.000000 | currency
@@ -140,7 +147,7 @@
 
     </div>
 
-    <div>
+    <div class="block">
         <p>
         <h2>json</h2>
         <table class="table">
@@ -154,7 +161,7 @@
         </p>
     </div>
 
-    <div>
+    <div class="block">
         <p>
         <h2>limitTo 截取</h2>
         Source : San Francisco is very cloudy
@@ -176,6 +183,131 @@
         </table>
         </p>
     </div>
+
+    <div class="block">
+        <p>
+        <h2>lowercase 转换成小写</h2>
+        <table class="table">
+            <tbody>
+            <tr>
+                <td>lowercase</td>
+                <td>{{ "San Francisco is very cloudy" | lowercase }}</td>
+            </tr>
+            </tbody>
+        </table>
+        </p>
+    </div>
+
+    <div class="block">
+        <p>
+        <h2>number Source:123456789</h2>
+        <table class="table">
+            <tbody>
+            <tr>
+                <td>number</td>
+                <td>{{123456789 | number}}</td>
+            </tr>
+            <tr>
+                <td>number:3 截取小数点后3位</td>
+                <td>{{123456789 | number:3}}</td>
+            </tr>
+            </tbody>
+        </table>
+        </p>
+    </div>
+
+    <div class="block">
+        <p>
+        <h2>orderBy</h2>
+        <p>
+            arr : {{orderbyArrData}}
+        <br>
+            json : {{orderbyJsonData}}
+        </p>
+
+        <table class="table">
+            <tbody>
+            <tr>
+                <td>arr</td>
+                <td>{{orderbyArrData | orderBy}}</td>
+            </tr>
+            <tr>
+                <td>json</td>
+                <td>{{orderbyJsonData | orderBy:'index'}}</td>
+            </tr>
+            <tr>
+                <td>arr 反转</td>
+                <td>{{orderbyArrData | orderBy:"":false }}</td>
+            </tr>
+            </tbody>
+        </table>
+        </p>
+    </div>
+
+    <div class="block">
+        <h2>自定义</h2>
+        {{ orderbyJsonData | orderBy : testFilter1 }}
+    </div>
+
+    <div class="block">
+        <h2>表单验证 </h2>
+        <ul>
+            <li>$pristine 没有修改过表单</li>
+            <li>$dirty 已经修改过</li>
+            <li>$valid 合法表单</li>
+            <li>$invalid 不合法表单</li>
+        </ul>
+        <form name="myForm" ng-submit="postFormData()">
+
+            <table class="table">
+                <tr>
+                    <td>required  value : {{requiredValue}}  property : {{requiredValue.$pristine}}</td>
+                    <td><input class="form-control" id="requiredName" name="requiredName" ng-model="requiredValue" type="text" required />
+                        <h4>$pristine : {{myForm.requiredName.$pristine}}</h4>
+                        <h4>$dirty : {{myForm.requiredName.$dirty}}</h4>
+                        <h4>$valid : {{myForm.requiredName.$valid}}</h4>
+                        <h4>$invalid : {{myForm.requiredName.$invalid}}</h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td>ng-minlength {{minlengthValue}}</td>
+                    <td><input class="form-control" name="minlengthName" ng-model="minlengthValue" type="text" ng-minlength="1" />
+                        <h4>$pristine : {{myForm.minlengthName.$pristine}}</h4>
+                        <h4>$dirty : {{myForm.minlengthName.$dirty}}</h4>
+                        <h4>$valid : {{myForm.minlengthName.$valid}}</h4>
+                        <h4>$invalid : {{myForm.minlengthName.$invalid}}</h4>
+                    </td>filter
+
+                </tr>
+                <tr>
+                    <td>ng-maxlength {{maxlengthValue}}</td>
+                    <td><input class="form-control" ng-model="maxlengthValue" type="text" ng-maxlength="2" /></td>
+                </tr>
+                <tr>
+                    <td>ng-pattern 不会写正则的只能说呵呵... {{patternValue}}</td>
+                    <td><input class="form-control" type="email" ng-model="patternValue" name="email"  ng-pattern="" /></td>
+                </tr>
+                <tr>
+                    <td>number {{numberValue}}</td>
+                    <td><input type="number" class="form-control" ng-model="numberValue"  /></td>
+                </tr>
+                <tr>
+                    <td>email {{emailValue}}</td>
+                    <td><input type="email" name="age" class="form-control"  ng-model="emailValue"  /></td>
+                </tr>
+                <tr>
+                    <td>url {{urlValue1}}</td>
+                    <td><input type="url" name="url" class="form-control" ng-model="urlValue1"  /></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button class="btn">提交</button></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+
 </div>
 
 
@@ -183,12 +315,37 @@
 <script type="text/javascript">
 
     var app = angular.module('myApp',[]);
-    app.controller('filterCtrl',function($scope){
+    app.controller('filterCtrl',function($scope,$filter){
+
+
         $scope.today = new Date();
+
         $scope.jsonData = ['a1','a2','b','c','d','e2'];
+
+        $scope.jsonData1 = [{a1:1,b:2},{a1:2,b:3}];
+
+        $scope.orderbyArrData = [4,9,2,7,6,3,1,8];
+
+        $scope.orderbyJsonData = [{ index:'a', name:'tommy' },{ index:'f',name:'cao'},{index:'d',name:'cao1'}];
+
+        $scope.orderbyFunc = function(obj1,obj2) {
+            return obj.name.indexOf('c') > -1;
+        };
+
         $scope.ilikee = function(str){
             return str.indexOf('e') > -1;
         }
+
+        $scope.postFormData = function(){
+            debugger;
+        }
+    });
+
+    app.filter('testFilter1',function(){
+        return function(obj) {
+            debugger;
+            return "haha,this is a filter";
+        };
     });
 </script>
 </body>
