@@ -5,8 +5,7 @@
     <title></title>
 </head>
 <body>
-	<div>
-	</div>	
+    <div></div>
 </body>
 </html>
 <script type="text/javascript">
@@ -27,28 +26,128 @@
 
 <script type="text/javascript">
 
-function w(str){
-    console.log(str);
-}
+    function w(str)
+    {
+        console.log(str);
+    }
 
-	(function(){
+    function wl(str)
+    {
+        w('-------------- ' + str + ' --------------')
+    }
 
-		var arr = [1,2,3,4,5,6,7,8,9];
+    function wlb(str)
+    {
+        w('-------------- ' + str + ' begin --------------')
+    }
+
+    function wle(str)
+    {
+        w('-------------- ' + str + ' end --------------')
+    }
+
+    //wlb('concat');
+    //wle('concat');
+
+
+    (function(){
+
+        var arr = [1,2,3,4,5,6,7,8,9];
 
         var arr1 = arr.concat('haha',["haha1",213]);
 
+        wlb('concat');
         w("arr : " + arr);
         w("arr1 : " + arr1);
+        wle('concat');
 
-
+        wlb('slice');
         var sliceArr = [1,2,3,4,5,6,7,8,9];
 
         w(sliceArr.slice(0));
         w(sliceArr.slice(1));
         w(sliceArr.slice(2));
         w(sliceArr.slice(2,3));
+        wle('slice');
 
-	})();
-	
+    wlb('splice');
+
+    var spliceArr = [1,2,3,4,5,6,7]
+    var removeArr = spliceArr.splice(1,2);
+
+    wl('remove');
+    w(spliceArr);
+    w(removeArr);
+
+    var insertArr = spliceArr.splice(1,0,10,11);
+
+    wl('insert');
+    w(spliceArr);
+    w(insertArr);
+
+    wl('replace');
+    var replcaeArr = spliceArr.splice(0,2,'test','test2');
+    w(spliceArr);
+    w(replcaeArr);
+
+    wle('splice');
+
+    wlb('indexOf')
+
+    var indexOfArr = [1,2,3,4,5,6,7,8];
+    w(indexOfArr.indexOf(2));
+    var a = function() {};
+    indexOfArr.push(a);
+    w(indexOfArr.indexOf(a));
+
+
+    wle("indexOf")
+
+
+    wlb('遍历')
+    wl('some');
+
+    var arr4 = [1,2,3,4,5,6,7,8];
+    var someResult = arr4.some(function(item,index,array){
+       return item > 7;
+    });
+
+    w(arr4);
+    w(someResult);
+
+    wl('every');
+    var everyArr = arr4.every(function(item){
+         return item > 7;
+    });
+    w(arr4);
+    w(everyArr);
+
+    wl('filter');
+    var filterArr = arr4.filter(function(item){
+        return item > 4;
+    });
+
+    w(arr4);
+    w(filterArr);
+
+    wl("forEach");
+    w('单纯的遍历，没什么好讲的..');
+
+    wl('map');
+    var mapResult = arr4.map(function (item,index){
+        return item * index;
+    });
+    w(mapResult);
+
+    wl('reduce');
+    var arr5 = [1,2,3,4];
+    w(arr5.reduce(function(pre,cur,index,arr){
+        return pre * cur;
+    }));
+
+    wle('遍历')
+
+    })();
+    
 
 </script>
