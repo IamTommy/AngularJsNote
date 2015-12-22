@@ -8,6 +8,7 @@
     <div></div>
 </body>
 </html>
+<script type="text/javascript" src="../js/common/moment.js"></script>
 <script type="text/javascript">
 
     function w(o)
@@ -148,6 +149,34 @@
     wle('遍历')
 
     })();
-    
+
+    (function(){
+
+        var date1 = new Date();
+
+        w(date1);
+
+        //chrome Tue Dec 22 2015 20:38:59 GMT+0800 (中国标准时间)
+        //IE 9   Tue Dec 22 20:39:58 UTC+0800 2015 
+
+        var dateString1 = '06/03/2015 19:22:17';
+        var dateString2 = '6/3/2015 19:22:17';
+
+        var dateString3 = 'Jan 12,2015';
+        var dateString4 = 'January 12,2015';
+
+        var dateString5 = '2015-06-07 19:22:17';
+        var dateString6 = '2015-06-07T19:22:17';
+        var dateString7 = '2015-06-07T19:22:17+08:00';
+
+
+        for(var i=1;i<8;i++)
+        {
+            eval("w(dateString"+ i +" + '      ' + (new Date(Date.parse(dateString"+ i +"))))");
+        }
+        debugger;
+        w(dateString6 + "    " + moment(dateString6));
+    })();
+
 
 </script>
