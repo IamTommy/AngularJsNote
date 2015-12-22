@@ -174,8 +174,23 @@
         {
             eval("w(dateString"+ i +" + '      ' + (new Date(Date.parse(dateString"+ i +"))))");
         }
-        debugger;
-        w(dateString6 + "    " + moment(dateString6));
+        
+        //换个环境测试一下
+        //w(dateString6 + "    " + moment(dateString6));
+
+        var date2 = new Date(Date.UTC(2015,5,7,19,22,17));
+        w(date2);
+
+        w(new Date(Date.now()));
+        w(new Date());
+
+        w("toDateString" + " " + date2.toDateString());
+        w("toTimeString" + " " + date2.toTimeString());
+        w("toLocaleString" + " " + date2.toLocaleString());
+        w("toString" + " " + date2.toString());
+        w("toUTCString" + " " + date2.toUTCString());
+    
+
     })();
 
 
