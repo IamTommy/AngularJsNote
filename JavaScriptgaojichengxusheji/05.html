@@ -292,6 +292,35 @@
         w(func8()(10));
 
 
+
+        function func9()
+        {
+            func10();
+        }
+
+        function func10()
+        {
+            w(func10.caller);
+        }
+
+        func9();
+
+        //call apply
+
+        var a = "1";
+        var json = {
+            a : '2'
+        }
+
+        function func11()
+        {
+            w(this.a);
+        }
+
+        func11();
+        func11.call(json);
+
+
     })();
 
 </script>
