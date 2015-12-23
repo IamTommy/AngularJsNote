@@ -153,6 +153,8 @@
 
     (function(){
 
+        wlb(' Date ');
+
         var date1 = new Date();
 
         w(date1);
@@ -177,7 +179,7 @@
         }
         
         //换个环境测试一下
-        //w(dateString6 + "    " + moment(dateString6));
+        w(dateString6 + "    " +  moment(dateString6).toDate());
 
         var date2 = new Date(Date.UTC(2015,5,7,19,22,17));
         w(date2);
@@ -191,6 +193,104 @@
         w("toString" + " " + date2.toString());
         w("toUTCString" + " " + date2.toUTCString());
     
+        //方法
+        var date3 = moment('2015-12-23T00:22:33').toDate();
+        w('getTime' + "   " + date3.getTime());
+        w('getTime' + "   " + new Date(date3.getTime()));
+        w('setTime' + "   " + date3.setTime(date3.getTime() + 1000));
+        w('setTime' + "   " + date3);
+
+
+
+        wle(' Date ');
+
+
+    })();
+
+    (function(){
+
+        wlb(' Function ');
+
+        //第一次知道还可以这样玩
+        var func1 = new Function('num1','num2','return num1 + num2');
+
+        w(func1(1,2));
+
+        func1 = function(n1,n2) {
+            return n1 - n2;
+        }
+
+        w(func1(1,2));
+
+        func2();
+        function func2 () {
+            w(' func2 is runing ');
+        }
+
+        try
+        {
+            func3();
+            var func3 = function()
+            {
+                w(' func3 is runing ');
+            }
+        }
+        catch(e)
+        {
+            w(" can't runing func3 ");
+        }
+
+        wle(' Function ');
+
+        //函数作为参数.
+        
+        function add(n1,n2) { 
+            return n1 + n2;
+        }
+
+        function subtract(n1,n2)
+        {
+            return n1 - n2;
+        }
+
+        function func4(calculate)
+        {
+            return calculate(3,4);
+        }
+
+        w(func4(add));
+        w(func4(subtract));
+
+        //必包
+
+        function func5(func6)
+        {
+            return function(n1,n2)
+            {
+                var v = func6(n1,n2);
+
+                return v + " is my result ";
+            };
+        }
+
+        var func7 = func5(add);
+
+        w(func7(1,2));
+
+        function func8()
+        {
+            return function(n){
+                if(n)
+                {
+                    return arguments.callee(n - 1);
+                }
+
+                return n;
+            }
+        }
+
+        w(func8()(10));
+
 
     })();
 
