@@ -240,7 +240,7 @@
             w(" can't runing func3 ");
         }
 
-        wle(' Function ');
+        
 
         //函数作为参数.
         
@@ -315,11 +315,46 @@
         function func11()
         {
             w(this.a);
+
+            for(var i = 0;i < arguments.length;i++)
+            {
+               w(arguments[i])
+            }
+            //arguments.length
         }
 
         func11();
-        func11.call(json);
+        func11.call(json,"test1",'test4');
+        func11.apply(json,['test2','test3'])
 
+        func11.bind(json)('test5');
+
+
+
+
+
+        wle(' Function ');
+
+    })();
+
+
+    (function(){
+
+        var str = new String('str test');
+
+        w(str);
+
+        w(str.length);
+
+        str.wocao = "wocao test";
+
+        w(str.wocao);
+
+        var b1 = false;
+        var b2 = new Boolean(false);
+
+        w(typeof b1);
+        w(typeof b2);
 
     })();
 
