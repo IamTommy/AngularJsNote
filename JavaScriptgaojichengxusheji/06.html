@@ -9,6 +9,27 @@
 </html>
 <script type="text/javascript">
 	
+    function w(str)
+    {
+        console.log(str);
+    }
+
+    function wl(str)
+    {
+        w('-------------- ' + str + ' --------------')
+    }
+
+    function wlb(str)
+    {
+        w('-------------- ' + str + ' begin --------------')
+    }
+
+    function wle(str)
+    {
+        w('-------------- ' + str + ' end --------------')
+    }
+
+
 (function(){
 
 	var a = {
@@ -56,5 +77,95 @@
 
 })();
 
+
+(function(){
+
+	wlb(" this & prototype ");
+
+
+	var funcTest  = function(){
+		this.a = "heiheihei";
+	}
+
+	funcTest.prototype.b = "dsa";
+
+	//var funcTest1 = new funcTest();
+
+	var funcTest1 = function(){
+
+	}
+
+	funcTest1.prototype = new funcTest();
+	funcTest1.prototype.a = "hi";
+
+	var test = new funcTest1();
+
+	w(test.a);
+	w(test.b);
+
+	test.a = 'heiheihei1';
+	test.b = 'dsa1';
+
+	w(test.a);
+	w(test.b);
+
+	w(test.constructor);
+	w(funcTest1.prototype.constructor);
+	
+	wlb('isPrototypeOf')
+	w(funcTest1.prototype.isPrototypeOf(test));
+	w(funcTest.prototype.isPrototypeOf(test));
+
+	wlb('getPrototypeOf')
+	w(Object.getPrototypeOf(test) === funcTest1.prototype);
+
+
+	var funcTest3 = function() {
+		this.a = "a";
+	}
+
+	funcTest3.prototype.a = "b";
+
+	var test3 = new funcTest3();
+
+	w(test3.a);
+
+	var funcTest4 = function() { };
+	funcTest4.prototype.a = "ab";
+	funcTest4.prototype.b = function() {
+		return "cd";
+	};
+
+	var test4 = new funcTest4();
+
+	w(test4.a);
+
+	test4.a = "ab1";
+
+	w(test4.a);
+
+	delete test4.a;
+
+	w(test4.a);
+
+
+
+
+	wle(" this & prototype ");
+
+
+	wlb('hasOwnProperty & in')
+
+	w(test4.hasOwnProperty('a'));
+	w("a" in test4);
+	test4.a = "ab1";
+	w(test4.hasOwnProperty('a'));
+	w("a" in test4);
+	delete test4.a;
+	w(test4.hasOwnProperty('a'));
+
+	wle('hasOwnProperty')
+
+})();
 
 </script>
