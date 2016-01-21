@@ -117,15 +117,15 @@
 
     var test4 = new funcTest4();
 
-    w(test4.a);
+    w(test4.a,'test4.a');
 
     test4.a = "ab1";
 
-    w(test4.a);
+    w(test4.a,'test4.a');
 
     delete test4.a;
 
-    w(test4.a);
+    w(test4.a,'test4.a');
 
 
 
@@ -392,10 +392,6 @@
 		w("hahah");
 	}
 	
-
-
-	debugger;
-
 	wle(' for test ')
 
 })();
