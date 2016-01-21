@@ -79,14 +79,14 @@
 
     var test = new funcTest1();
 
-    w(test.a);
-    w(test.b);
+    w(test.a,'test.a');
+    w(test.b,'test.b');
 
     test.a = 'heiheihei1';
     test.b = 'dsa1';
 
-    w(test.a);
-    w(test.b);
+    w(test.a,'test.a');
+    w(test.b,'test.b');
 
     w(test.constructor);
     w(funcTest1.prototype.constructor);
@@ -328,7 +328,75 @@
 		}
 	}
 
+	//这种方式最好的就是 你没法访问到 name
+	//私有变量
+	//只能通过你暴露的方法来做事情.
+
+	
+
 	wle(' wentuo。。 ')
+
+
+
+})();
+
+(function(){
+
+	wlb(' for test ')
+
+	function SuperType(name)
+	{
+		this.name = name;
+		this.colors = ['red','blue','green'];
+	}
+
+	SuperType.prototype.sayName = function()
+	{
+		w(this.name);
+	}
+
+	function SubType(name)
+	{
+		SuperType.call(this,name)
+	}
+
+	var o1 = new SuperType("heiheihei");
+
+	SubType.prototype = o1;
+
+	var o = new SubType();
+
+	w(o.name,'o.name');
+	w(o1.name,'o1.name');
+
+	o1.name = "wocao";
+	
+	w(o.name,'o.name');
+	w(o1.name,'o1.name');
+
+	
+
+	var o3 = Object(SuperType.prototype);
+	//o3.constructor = SubType;
+	SubType.prototype = o3;
+
+	var o4 = new SubType("heihei1");
+
+
+
+	SuperType.prototype.SaySomeThing = function() {
+		w("hahah");
+	}
+
+	SubType.prototype.SaySomeThing1 = function() {
+		w("hahah");
+	}
+	
+
+
+	debugger;
+
+	wle(' for test ')
 
 })();
 
