@@ -17,7 +17,139 @@
 
  	但是网上不推荐使用这种方式，因为性能 <br>
  </p>
+ <p>
+ 	<pre>
+ 	(function(){
+		var i = 0
+		try
+		{
+			function test()
+			{
+				i++;
+				test();
+			}
+			test();
+		}
+		catch(ex)
+		{
+			w(i);
+		}
+	})();
 
+	结果: <strong id="result1"></strong>
+ 	</pre>
+ </p>
+
+
+ <h2>作用域</h2>
+ <p>
+ 	javascript 没有块级作用域. <br>
+ 	也就是说 if  for 之类
+ </p>
+
+ <pre>
+ 	(function() {
+
+		for(var i=0;i<10;i++)
+		{
+
+		}
+
+		var b = false;
+		if(!b)
+		{
+			var a = "hehehe";
+		}
+
+		w(i,"i");
+		w(a,"a");
+
+	})();
+
+	结果: <strong id="result2"></strong>,<strong id="result3"></strong>
+ </pre>
+
+ <br>
+
+ <p>
+ 	
+ 	如果本来就不按照 执行顺序的 function。
+
+ 	<br>
+
+ 	那么 你写哪里都一样。 和是否在 if 里是没什么关系的.
+
+ </p>
+
+<pre>
+	
+		(function(){
+
+		var b = true;
+		if(b)
+		{
+			function a() {
+				w(' this is true block ')
+			}
+		}
+		else 
+		{
+			function a() {
+				w(' this is false block ')
+			}
+		}
+
+		a();
+
+	})();
+
+	结果：<strong id="result4"></strong>
+</pre>
+
+<h3> 必包 </h3>
+
+<p>
+	
+	必包几乎是每个前端面试基本都会问到的.. <br>
+
+	我理解的必包 就是作用域的延长。
+
+	首先 作用域就类似于下面这玩意儿
+</p>
+
+<pre>
+	
+	function a(b)
+	{
+		var c = '';
+	}
+
+	a('a');
+
+</pre>
+<p> 传入的参数，会当做a 里面的私有变量 复制一份传进去 </p>
+<p> 然后，当方法执行完以后，b&c 都会被销毁 </p>
+<p> 你是无法访问ta的 </p>
+
+<pre>
+	function a(b)
+	{
+		var c = "";
+
+		return function() {
+			return c;
+		}
+	}
+</pre>
+<p> 接下来 你就可以通过 返回的方法 访问到c </p>
+<p> ta本来该被销毁 作用域延长了。 可以当做一个私有的变量、 </p>
+<p> 坏处。就是内存问题, 太多必包对象。可能会造成内存问题</p>
+<p> this 问题 </p>
+<pre>
+	
+	function()
+
+</pre>
 
 </body>
 
@@ -27,18 +159,93 @@
 <script type="text/javascript">
 	
 	//递归
-	wlb(" di gui ");
+	wlb(" 递归 ");
+
+	(function(){
+		var i = 0
+		try
+		{
+			function test()
+			{
+				i++;
+				test();
+			}
+			test();
+		}
+		catch(ex)
+		{
+			w(i,'递归层数');
+			document.getElementById('result1').innerText = i;
+		}
+	})();
+
+	wle(" 递归 ");
+
+	wlb(' 块级作用域 ');
 
 	(function(){
 
-		function test()
+		for(var i=0;i<10;i++)
 		{
-			arguments.calle
+
 		}
 
+		var b = false;
+		if(!b)
+		{
+			var a = "hehehe";
+		}
+
+		document.getElementById('result2').innerText = i;
+		document.getElementById('result3').innerText = a;
+
+		w(i,"i");
+		w(a,"a");
 
 	})();
 
-	wle(" di gui ");
+	(function(){
+
+		var b = true;
+		if(b)
+		{
+			function a() {
+				w(' this is true block ');
+				document.getElementById('result4').innerText = ' this is true block ';
+			}
+		}
+		else 
+		{
+			function a() {
+				w(' this is false block ');
+				document.getElementById('result4').innerText = ' this is false block ';
+			}
+		}
+
+		a();
+
+	})();
+
+	wle(' 块级作用域 ')
+
+	wlb(' 必包 ');
+
+	var bibao = 1;
+	(function(){
+
+		var test1 = function() {
+
+			debugger;
+
+			return function() {
+				debugger;
+			};
+
+		};
+		test1()();
+
+	})();
+
+	wle(' 必包 ');
 
 </script>
