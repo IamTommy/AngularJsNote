@@ -147,7 +147,7 @@
 <p> this 问题 </p>
 <pre>
 	
-	function()
+	
 
 </pre>
 
@@ -230,21 +230,53 @@
 
 	wlb(' 必包 ');
 
-	var bibao = 1;
+	
 	(function(){
+		
+	   var test1 = function() {
+	   		var a = [];
+	   		for(var i=0;i<10;i++)
+	   		{
+	   			a[i] = function() {
+	   				w(i);
+	   			}
+	   		}
 
-		var test1 = function() {
+	   		return a;
+	   }
 
-			debugger;
+	   var arr = test1();
 
-			return function() {
-				debugger;
-			};
+	   for(var i=0;i<arr.length;i++)
+	   {
+	   		arr[i]();
+	   }
 
-		};
-		test1()();
+	   var  test2 = function() {
+	   		var a = [];
+	   		for(var i=0;i<10;i++)
+	   		{
+	   			a[i] = function(num) {
+	   				return function() {
+	   					w(num);
+	   				};
+	   			}(i)
+	   		}
+
+	   		return a;
+	   }
+
+	   var arr1 = test2();
+
+	   for(var i=0;i<arr1.length;i++)
+	   {
+	   		arr1[i]();
+	   }
+
 
 	})();
+
+
 
 	wle(' 必包 ');
 
