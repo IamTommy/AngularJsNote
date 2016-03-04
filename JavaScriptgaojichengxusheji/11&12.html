@@ -41,39 +41,60 @@
 
 (function(){
 
-datas = [];
-datas.push({
-	name : "document.anchors",
-	description :"所有Name的A元素",
-	function : "document.anchors",
-	result:'[<a name=​"localnews" class=​"focustop-anchor">​</a>​, <a name=​"civilnews" class=​"focustop-anchor">​</a>​, <a name=​"internews" class=​"focustop-anchor">​</a>​, <a name=​"financenews" class=​"focustop-anchor">​</a>​, <a name=​"enternews" class=​"focustop-anchor">​</a>​, <a name=​"sportspicnews" class=​"focustop-anchor">​</a>​, <a name=​"sportsnews" class=​"focustop-anchor">​</a>​, <a name=​"autonews" class=​"focustop-anchor">​</a>​, <a name=​"housenews" class=​"focustop-anchor">​</a>​, <a name=​"internet" class=​"focustop-anchor">​</a>​, <a name=​"internetplus" class=​"focustop-anchor">​</a>​, <a name=​"technews" class=​"focustop-anchor">​</a>​, <a name=​"edunews" class=​"focustop-anchor">​</a>​, <a name=​"gamenews" class=​"focustop-anchor">​</a>​, <a name=​"discovery" class=​"focustop-anchor">​</a>​, <a name=​"healthy" class=​"focustop-anchor">​</a>​, <a name=​"healthnews" class=​"focustop-anchor">​</a>​, <a name=​"healthpicwall" class=​"focustop-anchor">​</a>​, <a name=​"socialnews" class=​"focustop-anchor">​</a>​, <a name=​"milnews" class=​"focustop-anchor">​</a>​, <a name=​"imagenews" class=​"focustop-anchor">​</a>​]',
-	browser:function() {
-		if(document.anchors)
-			return true;
-		else 
-			return false
-	}
-})
-.push({
-	name : "",
-	description :"",
-	function : "",
-	result:"",
-	browser:function() {
+var colors = ['success','info','warning','danger']
+var datas = [];
 
-	}
+datas.push({
+	name : "document.querySelector",
+	description :"选择器. <br/> 不过他只会返回第一个.<br> 类似Jquery 选择器。 只是原生现在也有了.",
+	example : [{
+		f:"document.querySelector('img')",
+		d:"可以通过 Tag Name",
+		r:'<img src="http://ns2.bdstatic.com/static/fisp_static/common/img/show_top_qrcode/img/1014720j_63c8044.png">'
+	},{
+		f:"docuemnt.querySelector('#more-link')",
+		d:"#也可以用ID",
+		r:'<a target="_blank" href="/n?cmd=6&loc=6693&name=%E6%88%90%E9%83%BD&locname=%E6%88%90%E9%83%BD&locid=6693" id="more-link" style="visibility: visible;">更多</a>'
+	},{
+		f:"document.querySelector('.sub-class')",
+		d:"css当然也可以.",
+		r:'<div class="sub-class">…</div>'
+	}],
+	browser: '0001.png'
+});
+
+datas.push({
+	name : "document.querySelectorAll",
+	description :"和 document.querySelector 一模一样，只是他不再只返回第一个, 返回数组",
+	example : [{
+		f:"document.querySelectorAll('img')",
+		d:"通过 Tag Name,会返回所有的图片. 数组",
+		r:'NodeList[102]'
+	}],
+	browser: "0001.png"
 })
+
+
 
 var html = "";
 for(var i=0;i<datas.length;i++)
 {
 	var d = datas[i];
+	html += '<div style="margin-top:50px">',
+	html += '<h3>'+ d.name +'</h3>';
 	html += '<ul class="list-group">';
-	html += '<li class="list-group-item"><b>'+ d.name +'</b></li>';
 	html += "<li class='list-group-item'>" + d.description+ "</li>";
-	html += "<li class='list-group-item'>" + d.function + "</li>";
-	html += "<li class='list-group-item'>" + html_encode(d.result) + "</li>";
-	html += "<li class='list-group-item'>您的浏览器" + (d.browser() ? "支持":"不支持")  + "这个方法</li>";
+	if(d.example){
+	for(var y=0;y<d.example.length;y++)
+	{
+		html += "<li class='list-group-item list-group-item-" + colors[y % 4] +"'>" + d.example[y].f + "</li>";
+		html += "<li class='list-group-item list-group-item-" + colors[y % 4] +"'>" + d.example[y].d + "</li>";
+		html += "<li class='list-group-item list-group-item-" + colors[y % 4] +"'>" + html_encode(d.example[y].r) + "</li>";
+	}
+	}
+	html += "<li class='list-group-item'><img class='img-responsive' src='../img/" + d.browser +"' /></li>";
+	html += "</ul>";
+	html += '</div>';
 }
 
 document.getElementById('htmlData').innerHTML = html
