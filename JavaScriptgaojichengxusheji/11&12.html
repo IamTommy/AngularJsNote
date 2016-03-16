@@ -63,6 +63,8 @@ datas.push({
 	browser: '0001.png'
 });
 
+
+
 datas.push({
 	name : "document.querySelectorAll",
 	description :"和 document.querySelector 一模一样，只是他不再只返回第一个, 返回数组",
@@ -72,7 +74,37 @@ datas.push({
 		r:'NodeList[102]'
 	}],
 	browser: "0001.png"
+});
+
+datas.push({
+	name : "document.getElementsByClassName",
+	description :"document.getElementsByClassName 通过ClassName 来查询节点。 可以通过空格来 来查询多个",
+	example : [{
+		f:"document.getElementsByClassName('item')",
+		d:"查找 item 的 className",
+		r:'[<li class=​"item qr-code button-rotate" data-text=​"二维码">​…​</li>​, <li class=​"item favorite button-rotate" data-text=​"收藏本站">​…​</li>​, <li class=​"item hotword button-rotate" data-text=​"热词">​…​</li>​, <li class=​"item media button-rotate" data-text=​"传媒">​…​</li>​, <li class=​"item search button-rotate" data-text=​"搜索">​…​</li>​, <li class=​"item feedback button-rotate" id=​"feedbackbtn" data-text=​"用户反馈">​…​</li>​, <li class=​"item gotop" style=​"display:​ list-item;​">​…​</li>​, <li class=​"item item-01">​…​</li>​, <li class=​"item item-02">​…​</li>​, <li class=​"item item-03">​…​</li>​, <li class=​"item item-04">​…​</li>​, <li class=​"item item-05">​…​</li>​, <li class=​"item item-06">​…​</li>​]'
+	},{
+		f:"document.getElementsByClassName('item qr-code')",
+		d:"多加一个查询条件",
+		r:'<li class="item qr-code button-rotate" data-text="二维码"><a href="javascript:;">二维码</a></li>'
+	}],
+	browser: "0002.png"
 })
+
+datas.push({
+	name:" classList ",
+	description:" 原本的ClassName是一个String，classList 是一个类数组的东西. IE9都不支持,这让我很震惊 ",
+	example : [{
+		f : ' document.getElementsByClassName("item hotword")[0].classList  ',
+		d : ' 或许列表，这只是一个类数组的对象，并不是数组对象，没有push,等等 ',
+		r : ' ["item", "hotword", "button-rotate"] '
+	},{
+		f : ' add,remove,contains,toggle  ',
+		d : ' contains 返回 布尔值, toggle. 存在就删除，不存在就加入 ',
+		r : '  '
+	}],
+	browser: "0003.png"
+});
 
 
 
