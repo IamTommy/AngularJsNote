@@ -7,21 +7,52 @@
 </head>
 <body>
 	
-	<div ng-controller="myTest as ctrl">
+	<div ng-controller="myTestForm as ctrl">
 		
-
+		<div ng-include="'template1.html'" ng-init="sourceKey = 'myTestForm'"></div>
 
 	</div>
 
-</body>
-</html>
-<script scr="js/angular/angular.min.js"></script>
+
+<script type="application/javascript" src="Js/angular/angular.js"></script>
 <script type="text/javascript">
 	
-	var myApp = angular.module("myApp",['myTest']);
+	var dataSource = {
+		a:"a1",
+		b:"b2",
+		c:false,
+		d:"value1"
+	};
 
-	myApp.controller('myTest',function($scope) {
-		debugger;
-	})
+	var autoFormDisplayTypeEnum = {
+		text : "text",
+		checkbox:"checkbox",
+		select : "select",
+		radio:"radio"
+	};
+
+	var myApp = angular.module("myApp",['controllers']);
+
+	var controllers = angular.module("controllers",[]);
+	controllers.controller('myTestForm',function($scope) {
+		var sourceKey = "myTestForm";
+		$scope[sourceKey] = {};
+		$scope[sourceKey]["dataSource"] = dataSource;
+		$scope[sourceKey]["mapping"] = {
+			a: { 
+				name:"my A",
+				type:"text",
+				edit:true
+			}
+		}
+	});
+
+	controllers.controller('formTemplate',function($scope,$location) {		var sourceKey = $scope.sourceKey;
+		console.log('sourceKey : ' + sourceKey);
+
+	});
+
 
 </script>
+</body>
+</html>
