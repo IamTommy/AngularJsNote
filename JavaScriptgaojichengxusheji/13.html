@@ -1,0 +1,56 @@
+<!DOCTYPE html onckick="documentclick()">
+<html onckick="htmlclick()">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>13</title>
+</head>
+<body onclick="bodyclick()">
+
+<div onclick="divclick()">
+	
+<button type="button" id="mybtn" onclick="pclick(event,this)">test click</button>
+
+</div>
+
+
+</body>
+</html>
+<script type="text/javascript">
+	
+
+
+function pclick(e,obj) {
+	debugger;
+	console.log(obj.id);
+	console.log(this.id);
+		console.log('pclick is working');
+
+}
+
+function divclick() {
+
+	console.log('divclick is working');
+}
+
+function bodyclick()
+{
+
+	console.log('body click is working');
+}
+
+
+function htmlclick()
+{
+
+	console.log('htmlclick is working');
+}
+
+function documentclick()
+{
+
+	console.log('documentclick is working');
+}
+
+
+
+</script>
