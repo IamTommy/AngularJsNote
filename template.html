@@ -4,12 +4,21 @@
 	<title></title>
 	
     <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+		body {
+			background-color:white;
+		}
+    </style>
 </head>
 <body>
+<div formAuto></div>
+	<formAuto></formAuto>
 	
 	<div ng-controller="myTestForm as ctrl">
 		
-		<div ng-include="'template1.html'" ng-init="sourceKey = 'myTestForm'"></div>
+		<!-- <div ng-include="'template1.html'" ng-init="sourceKey = 'myTestForm'"></div> -->
+		<div formAuto></div>
 
 	</div>
 
@@ -17,6 +26,12 @@
 <script type="application/javascript" src="Js/angular/angular.js"></script>
 <script type="text/javascript">
 	
+//支持事件
+//动态加载
+//自定义html
+//自定义button
+//自定义css
+
 	var dataSource = {
 		a:"a1",
 		b:"b2",
@@ -31,25 +46,53 @@
 		radio:"radio"
 	};
 
-	var myApp = angular.module("myApp",['controllers']);
+	var myApp = angular.module("myApp",['controllers','myDirective']);
+
 
 	var controllers = angular.module("controllers",[]);
 	controllers.controller('myTestForm',function($scope) {
 		var sourceKey = "myTestForm";
+		$scope['testModel'] = true;
 		$scope[sourceKey] = {};
+		$scope[sourceKey]["title"] = "myTest title";
 		$scope[sourceKey]["dataSource"] = dataSource;
-		$scope[sourceKey]["mapping"] = {
-			a: { 
+		$scope[sourceKey]["mapping"] = [
+			{ 
+				key : "a",
 				name:"my A",
 				type:"text",
-				edit:true
+				edit:true,
+				require:true
+			},
+			{
+				key : 'b',
+				name:"my A",
+				type:"text",
+				require:true
 			}
-		}
+		];
 	});
 
-	controllers.controller('formTemplate',function($scope,$location) {		var sourceKey = $scope.sourceKey;
+
+
+	controllers.controller('formTemplate',function($scope,$location) {		
+		var me = this;
+		var sourceKey = $scope.sourceKey;
 		console.log('sourceKey : ' + sourceKey);
 
+
+		me.info = $scope[sourceKey];
+		
+	});
+
+	angular.module('myApp').directive('formAuto',function() {
+		return {
+			restrict :"EA",
+			template:'<div>11111111</div>',
+			controller:function() {
+				debugger;
+			}
+		}
 	});
 
 
