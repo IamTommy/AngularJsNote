@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<title></title>
+	
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+		body {
+			background-color:white;
+		}
+    </style>
+</head>
+<body>
+
+	<autoform></autoform>
+
+<script type="application/javascript" src="../Js/angular/angular.js"></script>
+<script type="text/javascript">
+	var myApp = angular.module("myApp",['directives','controllers']);
+
+	var controllers = angular.module("controllers",[]);
+	controllers.controller('myTestForm',function($scope) {
+		var sourceKey = "myTestForm";
+		$scope['testModel'] = true;
+		$scope[sourceKey] = {};
+		$scope[sourceKey]["title"] = "myTest title";
+		$scope[sourceKey]["dataSource"] = dataSource;
+		$scope[sourceKey]["mapping"] = [
+			{ 
+				key : "a",
+				name:"my A",
+				type:"text",
+				edit:true,
+				require:true
+			},
+			{
+				key : 'b',
+				name:"my A",
+				type:"text",
+				require:true
+			}
+		];
+	});
+
+	var directives = angular.module("directives",[]);
+	directives.directive('autoform',function() {
+		return {
+			restrict :'EA',
+			template:'<div>11111111</div>'
+		};
+	});
+
+
+</script>
+</body>
+</html>
