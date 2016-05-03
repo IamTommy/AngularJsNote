@@ -12,15 +12,19 @@
     </style>
 </head>
 <body>
-<div mytesthe></div>
+<div ng-controller="myTestForm as ctrl">
+	<autoform sourceKey="myTestForm"></autoform>	
+</div>
+ 
+<!-- <div mytesthe></div>
 	<mytesthe></mytesthe>
 	
 	<div ng-controller="myTestForm as ctrl">
 		
-		<!-- <div ng-include="'template1.html'" ng-init="sourceKey = 'myTestForm'"></div> -->
+		<div ng-include="'template1.html'" ng-init="sourceKey = 'myTestForm'"></div>
 		<div formAuto></div>
 
-	</div>
+	</div> -->
 
 
 <script type="application/javascript" src="Js/angular/angular.js"></script>
@@ -46,7 +50,54 @@
 		radio:"radio"
 	};
 
-	var myApp = angular.module("myApp",['controllers','myDirective']);
+	 var myApp = angular.module("myApp",['zhiling','controllers']);
+	 var zhiling = angular.module("zhiling",[]);
+
+	 zhiling.directive('autoform', function() {
+		    return {
+		        restrict: 'EA',
+		        scope:true,
+		        templateUrl : "template1.html",
+		        controller:function($scope,$element) {
+		        	var sourceKey = $element.attr('sourceKey');
+		        	if(!sourceKey)
+		        	{
+		        		console.log('souceKey missing');
+		        		return;
+		        	}
+
+		        	$scope['info'] = $scope[sourceKey];
+
+		        }
+			}
+	});
+
+	 function elementBuild($scope,$element)
+	 {
+	 	var require,edit;
+	 	var me = this;
+	 	require = $element.attr("require");
+	 	edit = $element.attr("edit");
+
+	 	if(require)	
+	 		me.require = 'require';
+
+	 	if(edit)
+	 	{
+	 		me.edit = '';
+	 	}
+
+	 }
+
+	 //验证，编辑，
+	zhiling.directive('textinput',function() {
+	 	return {
+		        restrict: 'EA',
+		        scope:true,
+		        template : "<input type='text' />",
+		        controller:'elementBuild as ctrl'
+		}
+	 })
 
 
 	var controllers = angular.module("controllers",[]);
@@ -66,12 +117,15 @@
 			},
 			{
 				key : 'b',
-				name:"my A",
+				name:"my B",
 				type:"text",
 				require:true
 			}
 		];
 	});
+
+	/*
+
 
 
 
@@ -85,15 +139,10 @@
 		
 	});
 
-	angular.module('myApp').directive('mytesthe',function() {
-		return {
-			restrict :"EA",
-			template:'<div>11111111</div>',
-			controller:function() {
-				debugger;
-			}
-		}
-	});
+	*/
+
+
+	
 
 
 </script>

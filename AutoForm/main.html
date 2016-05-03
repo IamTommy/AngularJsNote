@@ -3,7 +3,7 @@
 <head>
 	<title></title>
 	
-    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/style.css">
     <style>
 		body {
@@ -13,10 +13,28 @@
 </head>
 <body>
 
-	<autoform></autoform>
+<div ng-controller='myTestForm as ctrl'>
+	<autoform sourceKey="myTestForm"></autoform>
+</div>
 
 <script type="application/javascript" src="../Js/angular/angular.js"></script>
 <script type="text/javascript">
+
+
+	var dataSource = {
+		a:"a1",
+		b:"b2",
+		c:false,
+		d:"value1"
+	};
+
+	var autoFormDisplayTypeEnum = {
+		text : "text",
+		checkbox:"checkbox",
+		select : "select",
+		radio:"radio"
+	};
+
 	var myApp = angular.module("myApp",['directives','controllers']);
 
 	var controllers = angular.module("controllers",[]);
@@ -47,9 +65,43 @@
 	directives.directive('autoform',function() {
 		return {
 			restrict :'EA',
-			template:'<div>11111111</div>'
+			templateUrl :'formTemplate.html',
+			scope:true,
+			controller: 'autoFormController as formCtrl'
 		};
 	});
+
+	directives.directive('formtext',function() {
+		return {
+			restrict :'EA',
+			/*template :'<p ng-if="!formCtrl.rootScope[sourceKey + "editFlag"]"></p><input ng-if="edit &" formCtrl.rootScope[sourceKey + "editFlag"]/>',*/
+			template:'<p>hahahahaha</p>',
+			scope:true,
+			controller:formElementCommon
+		};
+	})
+
+	function autoFormController($scope,$element,$rootScope) {
+		var sourceKey = $element.attr('sourceKey');
+		$scope.info = $scope[sourceKey];
+		this.rootScope = $rootScope;
+		this.testEditFunc = function() {
+			debugger;
+		};
+	}
+
+	function formElementCommon($scope,$element)
+	{
+		debugger;
+		var sourceKey = $element.attr('sourceKey');
+		this.sourceKey = sourceKey;
+
+		var edit = $element.attr('edit');
+		if(edit == "true")
+			edit = true;
+		else 
+			edit = false;
+	}
 
 
 </script>

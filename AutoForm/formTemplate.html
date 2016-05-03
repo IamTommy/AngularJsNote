@@ -8,7 +8,7 @@
 				<h5>Test Data</h5>
 			</div>
 			<div class="ibox-content">
-			{{ info.dataSource}}
+			{{ info.dataSource }}
 			</div>
 		</div>
 		
@@ -16,7 +16,8 @@
 
 	<div class="ibox">
 		<div class="ibox-title-internal">
-			<h5>{{ info.title}}</h5>
+			<h5>{{ info.title }}</h5>
+			<button ng-click="formCtrl.testEditFunc()">testEdit</button>
 		</div>
 		<div class="ibox-content">
 			<form class="">
@@ -27,10 +28,7 @@
 					</label >
 					<div class="col-sm-8">
 						
-						模板
-						<p ng-if="item.type == 'text'"></p>
-						<input ng-if="item.type == 'text' &&" type="text" ng-model=" info.dataSource[item.key]">
-
+						<formtext ng-if="item.type == 'text'" edit="item.edit" souceKey='sourceKey'></formtext>
 
 					</div>
 				</div>

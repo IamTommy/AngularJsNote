@@ -1,43 +1,44 @@
-11111111111111111111111111111
-<!-- <div>
 	
-	<div ng-if="testModel == true">
+<div>
 
-		<div class="ibox">
-			<div class="ibox-title-internal">
-				<h5>Test Data</h5>
-			</div>
-			<div class="ibox-content">
-			{{formCtrl.info.dataSource}}
-			</div>
-		</div>
-		
-	</div>
+<div ng-if="testModel == true">
 
 	<div class="ibox">
 		<div class="ibox-title-internal">
-			<h5>{{formCtrl.info.title}}</h5>
+			<h5>Test Data</h5>
 		</div>
 		<div class="ibox-content">
-			<form class="">
-				
-				<div class="form-group" ng-repeat="item in formCtrl.info.mapping">
-					<label  class="control-label col-sm-4">
-						{{item.name}}
-					</label >
-					<div class="col-sm-8">
-						
-						模板
-						<p ng-if="item.type == 'text'"></p>
-						<input ng-if="item.type == 'text' &&" type="text" ng-model="formCtrl.info.dataSource[item.key]">
-
-
-					</div>
-				</div>
-				<div style="clear:both;"></div>
-			</form>		
+		dataSource: {{info.dataSource}} <br>
+		info.mapping : {{info.mapping}}
 		</div>
 	</div>
 	
+</div>
 
-</div> -->
+<div class="ibox">
+	<div class="ibox-title-internal">
+		<h5>{{info.title}}</h5>
+	</div>
+	<div class="ibox-content">
+		<form class="">
+			
+			<div class="row" class="form-group" ng-repeat="item in info.mapping">
+				<label  class="control-label col-sm-4">
+					{{item.name}}
+				</label >
+				<div class="col-sm-8">
+					
+<!-- 					<p ng-if="item.type == 'text'"></p>
+<input ng-if="item.type == 'text' &&" type="text" ng-model="info.dataSource[item.key]"> -->
+
+
+				</div>
+			</div>
+			<div style="clear:both;"></div>
+		</form>		
+	</div>
+</div>
+
+
+</div>
+ 
