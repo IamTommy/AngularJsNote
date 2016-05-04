@@ -67,15 +67,16 @@
 			restrict :'EA',
 			templateUrl :'formTemplate.html',
 			scope:true,
-			controller: 'autoFormController as formCtrl'
+			controller: autoFormController,
+			controllerAs : 'formCtrl'
 		};
 	});
 
 	directives.directive('formtext',function() {
 		return {
 			restrict :'EA',
-			/*template :'<p ng-if="!formCtrl.rootScope[sourceKey + "editFlag"]"></p><input ng-if="edit &" formCtrl.rootScope[sourceKey + "editFlag"]/>',*/
-			template:'<p>hahahahaha</p>',
+			template :'<p ng-if="!formCtrl.editFlag">text</p><input ng-if="edit & formCtrl.editFlag" />',
+			//template:'<p>hahahahaha</p>',
 			scope:true,
 			controller:formElementCommon
 		};
@@ -83,8 +84,11 @@
 
 	function autoFormController($scope,$element,$rootScope) {
 		var sourceKey = $element.attr('sourceKey');
+		
+		var me = this;
+		me.sourceKey = sourceKey;
+		me.editFlag = false;
 		$scope.info = $scope[sourceKey];
-		this.rootScope = $rootScope;
 		this.testEditFunc = function() {
 			debugger;
 		};
