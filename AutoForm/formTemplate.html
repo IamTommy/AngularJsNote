@@ -24,11 +24,11 @@
 				
 				<div class="form-group" ng-repeat="item in  info.mapping">
 					<label  class="control-label col-sm-4">
-						{{item.name}}
+						{{item.name}} {{item.edit}}
 					</label >
 					<div class="col-sm-8">
 						
-						<formtext ng-if="item.type == 'text'" edit="item.edit" souceKey='sourceKey'></formtext>
+						<formtext ng-if="item.type == 'text'" ng-init="edit = item.edit"></formtext>
 
 					</div>
 				</div>

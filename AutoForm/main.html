@@ -75,7 +75,7 @@
 	directives.directive('formtext',function() {
 		return {
 			restrict :'EA',
-			template :'<p ng-if="!formCtrl.editFlag">text</p><input ng-if="edit & formCtrl.editFlag" />',
+			template :'<p ng-if="!formCtrl.editFlag">text {{edit}}</p><input ng-if="edit & formCtrl.editFlag" />',
 			//template:'<p>hahahahaha</p>',
 			scope:true,
 			controller:formElementCommon
@@ -87,24 +87,31 @@
 		
 		var me = this;
 		me.sourceKey = sourceKey;
-		me.editFlag = false;
+		me.rootScope = $rootScope;
 		$scope.info = $scope[sourceKey];
-		this.testEditFunc = function() {
+
+		$scope.$watch('formCtrl.rootScope[formCtrl.sourceKey + "editFlag"]',function() {
 			debugger;
+			me.editFlag = me.rootScope[me.sourceKey + "editFlag"];
+		});
+
+		this.testEditFunc = function() {
+			me.rootScope[me.sourceKey + "editFlag"] = true;
 		};
 	}
 
 	function formElementCommon($scope,$element)
 	{
-		debugger;
+	
 		var sourceKey = $element.attr('sourceKey');
 		this.sourceKey = sourceKey;
 
 		var edit = $element.attr('edit');
+		debugger;
 		if(edit == "true")
-			edit = true;
+			$scope.edit = true;
 		else 
-			edit = false;
+			$scope.edit = false;
 	}
 
 
