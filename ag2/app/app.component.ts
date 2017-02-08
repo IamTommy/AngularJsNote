@@ -28,8 +28,8 @@ import { Component } from '@angular/core';
   </section>
 
   <my-title></my-title> -->
-
-  <my-form></my-form>
+  <button (click)='openTask("formEnable")' class='btn'>Form Task</button>
+  <my-form *ngIf='formEnable'></my-form>
   `,
 })
 export class AppComponent  {
@@ -44,4 +44,14 @@ export class AppComponent  {
 	 onEnter () {
 	 	console.log(' enter!!! ');
 	 }
+
+   clearAll() {
+      this.formEnable = false;
+   }
+
+   openTask(taskName : string)
+   {
+      this.clearAll();
+      this[taskName] = true;
+   }
  }

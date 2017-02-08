@@ -2,10 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
 	selector: 'my-form',
-    template: ` 
-    <h3>Love Form</h3>
-
-    `
+    templateUrl:'./html/loveForm.html'
 })
 
 export class TestLoveForm {
