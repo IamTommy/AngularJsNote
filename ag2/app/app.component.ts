@@ -46,7 +46,7 @@ export class AppComponent  {
 	 }
 
    clearAll() {
-      this.formEnable = false;
+      //this.formEnable = false;
    }
 
    openTask(taskName : string)
