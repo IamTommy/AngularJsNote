@@ -1,0 +1,36 @@
+<h1>Hello {{name}}</h1>
+  <!-- <ul>
+  	<li *ngFor='let o of toDoList'>{{o}}</li>
+  </ul>
+  <button (click)='changeShow($event)'>{{isShow}}</button>
+  <section *ngIf='isShow'>
+  	NgShow : {{isShow}}
+  </section>
+  <section *ngIf='!isShow'>
+  	NgHide : {{isShow}}
+  </section>
+
+  <section style='height:300px; width:300px; border:1px solid black'>
+
+  <h3>#box</h3>
+  	<input type='text' #box (click)="0" /> <br>
+  	{{box.value}}
+
+  <br>
+  <h3>[(ngModel)]</h3>
+  <input type='text' (keyup.enter)="onEnter()" [(ngModel)] = 'testNgModel' />
+  {{testNgModel}}
+
+  </section>
+
+  <my-title></my-title> -->
+
+  
+<section>
+  <button *ngFor='let task of taskList' (click)='openTask(task.key)' class="btn" style="margin-left:20px;">{{task.name}}</button>
+</section>
+
+<my-form *ngIf='formEnable'></my-form>
+  <my-ioc *ngIf='ioc'></my-ioc>
+
+

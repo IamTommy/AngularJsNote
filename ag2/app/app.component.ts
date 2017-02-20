@@ -2,37 +2,15 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'my-app',
-  template: `<h1>Hello {{name}}</h1>
-  <!-- <ul>
-  	<li *ngFor='let o of toDoList'>{{o}}</li>
-  </ul>
-  <button (click)='changeShow($event)'>{{isShow}}</button>
-  <section *ngIf='isShow'>
-  	NgShow : {{isShow}}
-  </section>
-  <section *ngIf='!isShow'>
-  	NgHide : {{isShow}}
-  </section>
-
-  <section style='height:300px; width:300px; border:1px solid black'>
-
-  <h3>#box</h3>
-  	<input type='text' #box (click)="0" /> <br>
-  	{{box.value}}
-
-  <br>
-  <h3>[(ngModel)]</h3>
-  <input type='text' (keyup.enter)="onEnter()" [(ngModel)] = 'testNgModel' />
-  {{testNgModel}}
-
-  </section>
-
-  <my-title></my-title> -->
-  <button (click)='openTask("formEnable")' class='btn'>Form Task</button>
-  <my-form *ngIf='formEnable'></my-form>
-  `,
+  templateUrl : './html/index.html',
 })
 export class AppComponent  {
+
+	taskList = [
+		{ name : 'Form Task', key : 'formEnable' },
+		{ name : 'Inversion of Control',key:'ioc' }
+	];
+
 	 name = 'Angular'; 
 	 toDoList = ['take a shower','read book','play game'];
 	 isShow = true;
@@ -46,7 +24,10 @@ export class AppComponent  {
 	 }
 
    clearAll() {
-      //this.formEnable = false;
+   		for(let task of this.taskList)
+   		{
+   			this[task.key] = false;
+   		}
    }
 
    openTask(taskName : string)
