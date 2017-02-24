@@ -18,6 +18,6 @@ import { UserService } from './services/userService'
 })
 export class AppModule {
 		constructor(userService : UserService) {
-			alert(userService.getUserList)
+			
 		}
  }
