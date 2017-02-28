@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {User} from "../class/userClass";
 import {UserService} from "../services/userService";
+import { FactoryService } from "../services/factoryService";
 
 @Component({
 	selector: 'my-ioc',
@@ -11,7 +12,10 @@ export class TestIOC {
   private _userService:UserService;
 
   curUser = {};
-  constructor(userService:UserService) {
+  constructor(
+    userService:UserService,
+    factoryService:FactoryService
+  ) {
     this._userService = userService;
   }
 
