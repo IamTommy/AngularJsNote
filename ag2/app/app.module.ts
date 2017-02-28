@@ -9,14 +9,14 @@ import { TestLoveForm }  from './testIndex/testLoveForm';
 import { TestIOC }  from './testIndex/testIOC';
 import { UserService } from './services/userService';
 import { LogService } from './services/logService';
-import { factoryServiceProvider } from "./provider/factory.provider";
+
 
 
 
 @NgModule({
   imports:      [ BrowserModule,FormsModule  ],
   declarations: [ AppComponent,MyNewTitle,TestLoveForm,TestIOC ],
-  providers:	[UserService,LogService,factoryServiceProvider],
+  providers:	[UserService,LogService],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule {

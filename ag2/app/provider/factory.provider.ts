@@ -7,12 +7,16 @@ import { FactoryService } from '../services/factoryService';
 import { LogService } from '../services/logService';
 
 
-let factoryServiceFactory = () => {
+let factoryServiceFactory = (log:LogService) => {
+  console.log(log);
   return new FactoryService("test");
 };
+
+let services:any[] = [LogService];
 
 export let factoryServiceProvider =
 {
   provide: FactoryService,
-  useFactory: factoryServiceFactory
+  useFactory: factoryServiceFactory,
+  deps:services
 };
