@@ -9,7 +9,12 @@ export class AppComponent  {
 	taskList = [
 		{ name : 'Form Task', key : 'formEnable' },
 		{ name : 'Inversion of Control',key:'ioc' }
+		{ name : 'Gammer Test',key:'gammar'}
 	];
+
+	testParam = {
+		testCode : 'test'
+	}
 
 	 name = 'Angular'; 
 	 toDoList = ['take a shower','read book','play game'];
