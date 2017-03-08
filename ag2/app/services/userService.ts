@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { User } from  '../class/userClass'
-
+import { LogService } from  '../services/logService'
 
 @Injectable()
 export class UserService {
 
-  constructor() {
-    
+  private logService:LogService;
+  constructor(
+    logService:LogService
+  ) {
+    this.logService = logService;
   }
 
   userList:any = [];
@@ -17,6 +20,7 @@ export class UserService {
   }
 
   getUserList() {
+    this.logService.createLog('get userlist',' empty ');
     return this.userList;
   }
 }

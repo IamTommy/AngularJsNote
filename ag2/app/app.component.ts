@@ -8,7 +8,7 @@ export class AppComponent  {
 
 	taskList = [
 		{ name : 'Form Task', key : 'formEnable' },
-		{ name : 'Inversion of Control',key:'ioc' }
+		{ name : 'Inversion of Control',key:'ioc' },
 		{ name : 'Gammer Test',key:'gammar'}
 	];
 
